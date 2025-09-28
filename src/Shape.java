@@ -53,6 +53,7 @@ public abstract class Shape {
     //public void setColor(Color c) { this.color = c; }
 
 
+
     protected abstract void constrain(double left, double top, double right, double bottom);
 
     public abstract void paint(GraphicsContext gc);
