@@ -9,7 +9,7 @@ public class Line {
     public double getY2() {
         return y2;
     }
-
+    
     public void setX2(double x2) {
         this.x2 = x2;
     }
