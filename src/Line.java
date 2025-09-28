@@ -14,7 +14,6 @@ public class Line {
         this.x2 = x2;
     }
 
-
     public void setY2(double y2) {
         this.y2 = y2;
     }
