@@ -1,42 +1,62 @@
-package inheritance.movable_interface;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
-public abstract class Shape implements Movable {
+public abstract class Shape {
 
-    private int x, y; // position
+    public static final double BILLION = 1_000_000_000.0;
+    private double x, y;
+    private double dx, dy;
+    private Color color;
 
     protected Shape() {
-        x = 0;
-        y = 0;
+        this.x = 0;
+        this.y = 0;
+        this.dx = 0;
+        this.dy = 0;
+        this.color = Color.BLACK;
     }
 
-    protected Shape(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
+    public double getX() {
         return x;
     }
-
-    public void setX(int x) {
-        if (x < 0) {
-            x = 0;
-        }
-        this.x = x;
-    }
-
-    public int getY() {
+    public double getY() {
         return y;
     }
-
-    public void setY(int y) {
-        if (y < 0) {
-            y = 0;
-        }
+    public void setX(double x) {
+        this.x = x;
+    }
+    public void setY(double y) {
         this.y = y;
     }
+    public double getDx() {
+        return dx;
+    }
+    public double getDy() {
+        return dy;
+    }
+    public void setVelocity(double dx, double dy) {
+        this.dx = dx;
+        this.dy = dy;
+    }
 
-    public abstract void draw();
+    public void moveAndConstrain(long dtNanos) {
+        move(dtNanos);
+    }
+
+    protected void move(long dtNanos) {
+        double dt = dtNanos / BILLION;
+        x += dx * dt;
+        y += dy * dt;
+    }
+
+    //public Color getColor() { return color; }
+    //public void setColor(Color c) { this.color = c; }
+
+
+    protected abstract void constrain(double left, double top, double right, double bottom);
+
+    public abstract void paint(GraphicsContext gc);
+
 
     @Override
     public String toString() {
