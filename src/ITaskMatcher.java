@@ -1,3 +1,5 @@
-public class ITaskMatcher{
-    //detta ska vara något form av interface
+public interface ITaskMatcher{
+
+    //Kontrollerar om ett givet Task-obj matchar det angivna kriteriet
+    boolean match(Task task);
 }
