@@ -13,7 +13,7 @@ public abstract class Shape {
         this.y = 0;
         this.dx = 0;
         this.dy = 0;
-        this.color = Color.BLACK;
+        this.color = Color.WHITE;
     }
 
     public double getX() {
@@ -49,8 +49,8 @@ public abstract class Shape {
         y += dy * dt;
     }
 
-    //public Color getColor() { return color; }
-    //public void setColor(Color c) { this.color = c; }
+    public Color getColor() { return color; }
+    public void setColor(Color c) { this.color = c; }
 
 
 

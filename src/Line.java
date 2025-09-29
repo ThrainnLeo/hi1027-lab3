@@ -1,3 +1,7 @@
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
+
 public class Line {
     private double x2;
     private double y2;
