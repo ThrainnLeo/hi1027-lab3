@@ -1,44 +1,48 @@
 public class Circle extends Shape {
 
-    private int radius;
+    private double diameter;
 
     public Circle() {
         super();
-        radius = 10;
+        diameter = 10;
     }
 
-    public Circle(int x, int y, int radius) {
+    public Circle(int x, int y, double diameter) {
         super(x, y);
-        this.radius = radius;
+        this.diameter = diameter;
     }
 
-    public int getRadius() {
-        return radius;
+    public double getDiameter() {
+        return diameter;
     }
 
-    public void setRadius(int radius) {
-        if (radius < 0) {
-            radius = 0;
+    public void setDiameter(double diameter) {
+        if (diameter < 0) {
+            diameter = 0;
         }
-        this.radius = radius;
+        this.diameter = diameter;
     }
 
     @Override
-    public void draw() {
-        System.out.println("Faking draw...");
-        System.out.println(this.toString());
+    public void paint(GraphicsContext gc) {
+        gc.setStroke(getColor());
+        gc.strokeOval(getX(), getY(), diameter, diameter);
     }
 
     @Override
-    public void move(int dx, int dy) {
-        this.setX(this.getX() + dx);
-        this.setY(this.getY() + dy);
+    public void constrain(double boxX, double boxY, double boxWidth, double boxHeight) {
+        if (getX() < boxX || getX() + diameter > boxX + boxWidth) {
+            setVelocity(-getDx(), getDy());
+        }
+        if (getY() < boxY || getY() + diameter > boxY + boxHeight) {
+            setVelocity(getDx(), -getDy());
+        }
     }
 
     @Override
     public String toString() {
         String info = "Circle: " + super.toString();
-        info += ", radius = " + radius;
+        info += ", Diameter = " + diameter;
         return info;
     }
 }
