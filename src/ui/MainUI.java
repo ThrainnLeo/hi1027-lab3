@@ -32,13 +32,13 @@ public class MainUI {
 
             switch (choice) {
                 case 'F':
-                    //findProjects();
+                    findProjects();
                     break;
                 case 'A':
                     addProject();
                     break;
                 case 'M':
-                    //manageProject();
+                    manageProject();
                     break;
                 case 'X':
                     break;
@@ -50,7 +50,7 @@ public class MainUI {
         System.out.println("Bye bye! This was an ugly ui - I hope I'll learn about JavaFX and gui:s");
     }
 
-    /*
+
     private void findProjects() {
         System.out.print("Project name? ");
         String name = scan.nextLine();
@@ -64,7 +64,6 @@ public class MainUI {
         }
     }
 
-     */
 
     private void addProject() {
         try {
@@ -79,7 +78,7 @@ public class MainUI {
         }
     }
 
-    /*
+
     private void manageProject() {
         System.out.print("Project id? ");
         int id = scan.nextInt();
@@ -93,7 +92,6 @@ public class MainUI {
         }
     }
 
-     */
 
     private void printMainMenu() {
         System.out.println("---Main menu---");

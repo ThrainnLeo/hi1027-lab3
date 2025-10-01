@@ -5,48 +5,74 @@ import exception.TitleNotUniqueException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
-
-    public class ProjectsManager implements Serializable {
+public class ProjectsManager implements Serializable {
         private final List<Project> projects;
-        private int nextTaskId;
+        private int nextProjectId;
 
         public ProjectsManager() {
             this.projects = new ArrayList<>();
-            this.nextTaskId = 1;
+            this.nextProjectId = 1;
+        }
+
+        public List<Project> getProjects() {
+            return projects;
+        }
+
+        public void setProjects(List<Project> incomingProjects) {
+            projects.clear();
+            projects.addAll(incomingProjects);
+            //Detta kan vara en lösning har ej testat
+            nextProjectId = incomingProjects.stream()
+                    .mapToInt(Project::getId)
+                    .max()
+                    .orElse(0) //om listan är tom returnera 0
+                    + 1;
         }
 
         public boolean isTitleUnique(String title){
             return projects.stream()
-                    .allMatch(project-> project.getTitle().equalsIgnoreCase(title));
+                    .noneMatch(project-> project.getTitle().equalsIgnoreCase(title));
         }
 
         public Project addProject(String title, String description) throws TitleNotUniqueException {
 
-            if(isTitleUnique(title)){
-                throw new TitleNotUniqueException("Project with title" + title + "already exists!");
+            if(!isTitleUnique(title)){
+                throw new TitleNotUniqueException("Project with title " + title + "already exists!");
             }
 
-            Project newProject = new Project(title, description, nextTaskId);
+            Project newProject = new Project(title, description, nextProjectId);
             projects.add(newProject);
-            nextTaskId++;
+            nextProjectId++;
 
             return newProject;
-
         }
 
         public void removeProject(Project project){
             projects.remove(project);
-            nextTaskId--;
+            nextProjectId--;
         }
 
-        //lite oklart om den ska vara en "List" eller "Optional" här och vad den ska göra
-        public List<Project> getProjectById(int id){
-            return projects; //skriva något här
+        public Project getProjectById(int id){
+            return projects.stream()
+                    .filter(project-> project.getId() == id)
+                    .findFirst().orElse(null);
         }
 
-        public void setProjects(List<Project> incomingProjects) {
+        public List<Project> findProjects(String titleStr){
+            return projects.stream()
+                    .filter(project -> project.getTitle().contains(titleStr))
+                    .collect(Collectors.toList());
+        }
 
+        public int getHighestId(){
+            if(projects.isEmpty()){
+                throw new IllegalStateException("No projects found!");
+            }
+            return projects.stream()
+                    .mapToInt(Project::getId)
+                    .max()
+                    .orElse(0);
         }
     }

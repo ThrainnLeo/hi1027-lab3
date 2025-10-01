@@ -34,18 +34,10 @@ public class Project implements Comparable<Project>, Serializable {
     }
 
     public List<Task> findTasks(ITaskMatcher matcher){
-        List<Task> matchTask = tasks.stream()
-
+        return tasks.stream()
                 .filter(matcher::match)
+                .sorted(Comparator.comparing(Task::getPrio))
                 .collect(Collectors.toList());
-        //.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
-        /*
-            Eftersom Task implementerar Comparable<Task> och har compareTo() metoden,
-            kommer Collections.sort() att sortera listan baserat på Prio (första nyckel)
-            och Description (andra nyckel)
-         */
-        Collections.sort(matchTask);
-        return matchTask;
     }
 
     public Task addTask(String description, TaskPrio prio){
