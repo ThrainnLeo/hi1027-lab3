@@ -27,9 +27,8 @@ public class Project implements Comparable<Project>, Serializable {
 
     public Task getTaskById(int id){
         Optional<Task> foundTask = tasks.stream()
-                .filter(task -> task.getId() == id)    //hittar ett unikt id
-                .findFirst();                               // Returnerar första resultatet
-        //Returnera Task-objektet, annars null om sökningen misslyckas
+                .filter(task -> task.getId() == id)
+                .findFirst();
         return foundTask.orElse(null);
     }
 
