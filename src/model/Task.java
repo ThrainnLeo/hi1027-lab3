@@ -49,7 +49,7 @@ public class Task  implements Comparable<Task>, Serializable {
     //Sätter namnet på den som tar sig an uppgiften, (takenBy) Namnet på den som tar sig an uppgiften
     //Skickar en exception om uppgiften redan är tagen
     public void setTakenBy(String takenBy) throws IllegalStateException{
-        if(takenBy != null){
+        if(takenBy == null){
             throw new IllegalStateException("Activity already occupied by: " + this.takenBy);
         }
         this.takenBy = takenBy;
@@ -68,8 +68,8 @@ public class Task  implements Comparable<Task>, Serializable {
 
     @Override
     public int compareTo(Task other) {
-        //Lite oklart vad som händer här kolla lite senare
-        int prioComp = other.prio.compareTo(this.prio);
+        //Kan vara att jag har vänt ordningen här
+        int prioComp = prio.compareTo(other.prio);
         if(prioComp != 0){
             return prioComp;
         }
