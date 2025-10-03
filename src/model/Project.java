@@ -41,7 +41,7 @@ public class Project implements Comparable<Project>, Serializable {
                 taskMatcher.add(task);
             }
         }
-        Collections.sort(taskMatcher, Comparator.comparing(task -> task.getId()));
+        Collections.sort(taskMatcher);
         return taskMatcher;
     }
 

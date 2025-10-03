@@ -76,10 +76,6 @@ public class ProjectsManager implements Serializable {
         public int getHighestId(){
             int highestId = 0;
 
-            if(projects.isEmpty()){
-                throw new IllegalStateException("No projects found!");
-            }
-
             for(Project project : projects){
                 if(project.getId() > highestId){
                     highestId = project.getId();
