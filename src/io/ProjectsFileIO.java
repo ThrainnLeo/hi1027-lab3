@@ -2,8 +2,7 @@ package io;
 
 import model.Project;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 /**
@@ -17,8 +16,11 @@ public class ProjectsFileIO {
      * in serialized form.
      */
     public static void serializeToFile(File file, List<Project> data) throws IOException {
-        // ...
-        // and then, make sure the file always get closed
+        try (FileOutputStream fileOut = new FileOutputStream(file);
+             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
+
+            objectOut.writeObject(data);
+        }
     }
 
     /**
@@ -27,9 +29,12 @@ public class ProjectsFileIO {
      */
     @SuppressWarnings("unchecked")
     public static List<Project> deSerializeFromFile(File file) throws IOException, ClassNotFoundException {
-        // ...
-        // and then, make sure the file always get closed'
-        return null; //Kan ta bort senare
+        try (FileInputStream fileIn = new FileInputStream(file);
+             ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
+
+            List<Project> projects = (List<Project>) objectIn.readObject();
+            return projects;
+        }
     }
 
     private ProjectsFileIO() {}
