@@ -65,8 +65,8 @@ public class Project implements Comparable<Project>, Serializable {
 
     public List<Task> findTasks(ITaskMatcher matcher){
         return tasks.stream()
-                .filter(matcher::match)
-                .sorted(Comparator.comparing(Task::getPrio))
+                .filter(task -> matcher.match(task))
+                .sorted(Comparator.comparing(task -> task.getPrio()))
                 .collect(Collectors.toList());
     }
 
