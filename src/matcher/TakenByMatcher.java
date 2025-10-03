@@ -6,7 +6,7 @@ public class TakenByMatcher implements ITaskMatcher{
     private final String requiredTakenBy;
 
     public TakenByMatcher(String requiredTakenBy){
-        this.requiredTakenBy = requiredTakenBy.trim().toLowerCase();
+        this.requiredTakenBy = requiredTakenBy;
     }
 
     @Override
@@ -15,7 +15,6 @@ public class TakenByMatcher implements ITaskMatcher{
         if(takenBy == null || takenBy.isEmpty()){
             return false;
         }
-
-        return takenBy.equals(requiredTakenBy);
+        return true;
     }
 }
