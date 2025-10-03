@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/*
+Huvudklassen som hanterar alla Project-objekt i applikationen
+Fungerar som en container och ansvarar för att hantera unika ID och titlar
+ */
+
 public class ProjectsManager implements Serializable {
         private final List<Project> projects;
         private int nextProjectId;
@@ -17,17 +22,19 @@ public class ProjectsManager implements Serializable {
         }
 
         public List<Project> getProjects() {
-            return projects;
+            List<Project> projectCopy = new ArrayList<>(this.projects);
+            return projectCopy;
         }
 
+        //Denna metod används för deseralisering
         public void setProjects(List<Project> incomingProjects) {
             projects.clear();
             projects.addAll(incomingProjects);
-            //Detta kan vara en lösning har ej testat
+
             nextProjectId = incomingProjects.stream()
                     .mapToInt(Project::getId)
                     .max()
-                    .orElse(0) //om listan är tom returnera 0
+                    .orElse(0)
                     + 1;
         }
 
@@ -49,9 +56,9 @@ public class ProjectsManager implements Serializable {
             return newProject;
         }
 
+
         public void removeProject(Project project){
             projects.remove(project);
-            nextProjectId--;
         }
 
         public Project getProjectById(int id){

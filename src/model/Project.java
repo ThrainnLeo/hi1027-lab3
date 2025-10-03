@@ -7,6 +7,11 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/*
+Representerar ett prijekt och dess meradata och en samling av tasks
+Är jämförbar (Comparable) för sortering och serialiserbar för filhantering
+ */
+
 public class Project implements Comparable<Project>, Serializable {
     private final List<Task> tasks;
     private final String title;
@@ -51,11 +56,11 @@ public class Project implements Comparable<Project>, Serializable {
         return tasks.remove(task);
     }
 
-    public String getTitle(){ //Detta kan vara helt fel (för att addProject ska funka i ProjectsManager ska funka)
+    public String getTitle(){
         return title;
     }
 
-    public int getId(){ //denna kan vara fel samma som getTitle
+    public int getId(){
         return id;
     }
 
@@ -63,8 +68,8 @@ public class Project implements Comparable<Project>, Serializable {
         if(tasks.isEmpty()){
             return ProjectState.EMPTY;
         }
-        //kolla noggrannare på denna rad, Den ska bara kolla igenon task-objekten och sen kolla viket state den är i
-        boolean allDone = tasks.stream().allMatch(task -> task.getState() == TaskState.DONE);
+        boolean allDone = tasks.stream()
+                .allMatch(task -> task.getState() == TaskState.DONE);
 
         if(allDone){
             return ProjectState.COMPLETED;
@@ -76,7 +81,6 @@ public class Project implements Comparable<Project>, Serializable {
         if(tasks.isEmpty()){
             return created;
         }
-        //kolla noga på denna rad jag förstår inte riktigt, detta har något med task-objekten att göra
         return tasks.stream()
                 .map(Task::getLastUpdate)
                 .max(LocalDate::compareTo)
@@ -108,7 +112,6 @@ public class Project implements Comparable<Project>, Serializable {
                 ", id=" + id +
                 ", description='" + description + '\'' +
                 ", created=" + created +
-                ", nextTaskId=" + nextTaskId +
                 '}';
     }
 }

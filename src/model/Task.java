@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/*
+Representerar en enskild uppgift inom ett projekt
+Klassen implementerar comparable för sortering och är serialzable för fil-IO
+ */
+
 public class Task  implements Comparable<Task>, Serializable {
     private final String description;
     private final int id;
@@ -47,7 +52,7 @@ public class Task  implements Comparable<Task>, Serializable {
     }
 
     public void setTakenBy(String takenBy) throws IllegalStateException{
-        if(takenBy == null){
+        if(this.takenBy != null){
             throw new IllegalStateException("Activity already occupied by: " + this.takenBy);
         }
         this.takenBy = takenBy;
@@ -66,7 +71,7 @@ public class Task  implements Comparable<Task>, Serializable {
 
     @Override
     public int compareTo(Task other) {
-        int prioComp = prio.compareTo(other.prio);
+        int prioComp = prio.compareTo(other.prio);//kolla om den stämmer för det kan vara tvärtom
         if(prioComp != 0){
             return prioComp;
         }
