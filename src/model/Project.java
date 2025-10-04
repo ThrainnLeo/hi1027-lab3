@@ -26,6 +26,7 @@ public class Project implements Comparable<Project>, Serializable {
      * @param description
      * @param id
      */
+
     Project(String title, String description, int id) {
         this.title = title;
         this.description = description;
@@ -56,7 +57,7 @@ public class Project implements Comparable<Project>, Serializable {
      * @param matcher
      * @return
      */
-    public List<Task> findTasks(ITaskMatcher matcher){//kolla om den funkar
+    public List<Task> findTasks(ITaskMatcher matcher){
         List<Task> taskMatcher = new ArrayList<>();
         for(Task task : tasks){
             if(matcher.match(task)){
@@ -86,6 +87,7 @@ public class Project implements Comparable<Project>, Serializable {
      * @param task
      * @return true if the task was removed (or false)
      */
+
     public boolean removeTask(Task task){
         return tasks.remove(task);
     }
@@ -165,7 +167,7 @@ public class Project implements Comparable<Project>, Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode() { //HashCode Genererar en int för att lättare hantera objekt
         return Objects.hashCode(title);
     }
 

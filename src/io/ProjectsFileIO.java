@@ -28,6 +28,8 @@ public class ProjectsFileIO {
      * from file the specified file.
      */
     @SuppressWarnings("unchecked")
+
+
     public static List<Project> deSerializeFromFile(File file) throws IOException, ClassNotFoundException {
         try (FileInputStream fileIn = new FileInputStream(file);
              ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
