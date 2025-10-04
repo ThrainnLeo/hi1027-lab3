@@ -156,11 +156,6 @@ public class Task  implements Comparable<Task>, Serializable {
         return prio == task.prio && Objects.equals(description, task.description);
     }
 
-    /**
-     *
-     * @return A hash code value for the object.
-     */
-
     @Override
     public int hashCode() {
         return Objects.hash(description, prio);
