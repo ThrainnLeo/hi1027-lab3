@@ -10,7 +10,6 @@ public class PrioMatcher implements ITaskMatcher{
         this.requiredPrio = requiredPrio;
     }
 
-    // Matchar om taskens prioritet är exakt densamma som den önskade prioriteten.
     @Override
     public boolean match(Task task) {
         return task.getPrio() == requiredPrio;
