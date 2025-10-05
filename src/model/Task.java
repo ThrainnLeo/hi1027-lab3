@@ -19,7 +19,8 @@ public class Task  implements Comparable<Task>, Serializable {
     private TaskPrio prio;
 
     /**
-     * This constructor is package-private to ensure Tasks are only created
+     * This constructor is package-private to ensure that the code has
+     * more control over the lifecycle of the object. Tasks are only created
      * via the Project class to manage unique ID.
      * @param description
      * @param prio
@@ -151,7 +152,9 @@ public class Task  implements Comparable<Task>, Serializable {
     @Override
     public boolean equals(Object o) {
         if(this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
         Task task = (Task) o;
         return prio == task.prio && Objects.equals(description, task.description);
     }

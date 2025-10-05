@@ -15,6 +15,6 @@ public class TakenByMatcher implements ITaskMatcher{
         if(takenBy == null || takenBy.isEmpty()){
             return false;
         }
-        return true;
+        return requiredTakenBy.equals(takenBy);
     }
 }

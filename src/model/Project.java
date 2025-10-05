@@ -38,9 +38,9 @@ public class Project implements Comparable<Project>, Serializable {
     }
 
     /**
-     * Retrives a Task by its unique ID within tis project.
+     * Retrives a Task by its unique ID within this project.
      * @param id
-     * @return
+     * @return the desired task or null if the task does not exist
      */
     public Task getTaskById(int id){
         for(Task task : tasks){
@@ -55,7 +55,7 @@ public class Project implements Comparable<Project>, Serializable {
      * Filters the project's tasks using specific matching strategy
      * The returned list is sorted according to the natural order of Task
      * @param matcher
-     * @return
+     * @return A sorted list of tasks
      */
     public List<Task> findTasks(ITaskMatcher matcher){
         List<Task> taskMatcher = new ArrayList<>();
@@ -72,7 +72,7 @@ public class Project implements Comparable<Project>, Serializable {
      * Creates a new Task, assigns it a unique ID, and adds it to the project
      * @param description
      * @param prio
-     * @return
+     * @return A task with a description, priority and an ID
      */
     public Task addTask(String description, TaskPrio prio){
 
@@ -161,7 +161,9 @@ public class Project implements Comparable<Project>, Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
         Project project = (Project) o;
         return Objects.equals(title, project.title);
     }
